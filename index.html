@@ -17,7 +17,7 @@
     .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: 4px; }
   </style>
 </head>
-<body id="app-body" class="min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white bg-slate-950 text-slate-100">
+<body id="app-body" class="min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white bg-slate-950 text-slate-100 w-full overflow-x-hidden">
 
   <!-- MODAL +18 LEGAL (Opcional) -->
   <div id="age-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
@@ -54,12 +54,12 @@
   </div>
 
   <!-- BARRA DE ESTADO Y CONTROL ADMIN -->
-  <div id="top-bar" class="bg-purple-950/40 border-b border-purple-900/40 py-2 px-4 text-center text-xs text-purple-300 flex flex-col sm:flex-row justify-between items-center gap-2">
-    <div class="flex items-center gap-1.5 mx-auto sm:mx-0">
+  <div id="top-bar" class="w-full bg-purple-950/40 border-b border-purple-900/40 py-2 px-4 text-xs text-purple-300 flex flex-col sm:flex-row justify-between items-center gap-2">
+    <div class="flex items-center justify-center gap-1.5 w-full sm:w-auto text-center sm:text-left">
       <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-purple-400 shrink-0"></i>
-      <span id="top-announcement" class="font-medium text-[11px] sm:text-xs text-center sm:text-left">¡Bienvenidos a nuestra tienda oficial!</span>
+      <span id="top-announcement" class="font-medium text-[11px] sm:text-xs">¡Bienvenidos a nuestra tienda oficial!</span>
     </div>
-    <div id="admin-indicator" class="hidden items-center gap-2 bg-purple-900/80 border border-purple-500/40 px-3 py-1 rounded-full">
+    <div id="admin-indicator" class="hidden items-center gap-2 bg-purple-900/80 border border-purple-500/40 px-3 py-1 rounded-full shrink-0">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
       <span class="text-[10px] font-bold text-white uppercase">Modo Editor Activo</span>
       <button onclick="logoutAdmin()" class="text-slate-400 hover:text-white text-[10px] underline ml-1">Salir</button>
@@ -67,45 +67,45 @@
   </div>
 
   <!-- HEADER / BARRA SUPERIOR -->
-  <header id="main-header" class="sticky top-0 bg-slate-950/90 backdrop-blur-md border-b border-slate-800 z-30">
-    <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-2.5 cursor-pointer" onclick="filterCategory('all')">
-        <div id="site-logo-icon" class="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center font-display font-black text-white text-lg shadow-lg">STORE</div>
-        <div>
-          <h1 id="site-name-display" class="font-display font-black text-lg tracking-wider text-white leading-tight">MI TIENDA</h1>
-          <p id="site-subtitle-display" class="text-[9px] tracking-widest text-purple-400 uppercase font-semibold">Productos Exclusivos</p>
+  <header id="main-header" class="w-full sticky top-0 bg-slate-950/90 backdrop-blur-md border-b border-slate-800 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 w-full">
+      <div class="flex items-center gap-2.5 cursor-pointer shrink-0" onclick="filterCategory('all')">
+        <div id="site-logo-icon" class="w-9 h-9 bg-purple-600 rounded-xl flex items-center justify-center font-display font-black text-white text-base shadow-lg shrink-0">STORE</div>
+        <div class="min-w-0">
+          <h1 id="site-name-display" class="font-display font-black text-base sm:text-lg tracking-wider text-white leading-tight truncate">MI TIENDA</h1>
+          <p id="site-subtitle-display" class="text-[8px] sm:text-[9px] tracking-widest text-purple-400 uppercase font-semibold truncate">Productos Exclusivos</p>
         </div>
       </div>
       
-      <div class="flex flex-wrap items-center gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
         <!-- BOTONES ADMIN ACCESO RÁPIDO -->
-        <button id="admin-settings-btn" onclick="openSettingsModal()" class="hidden bg-purple-600 hover:bg-purple-500 text-white font-bold px-3 py-2 rounded-xl text-xs items-center gap-1.5 transition shadow-lg">
+        <button id="admin-settings-btn" onclick="openSettingsModal()" class="hidden bg-purple-600 hover:bg-purple-500 text-white font-bold p-2 sm:px-3 sm:py-2 rounded-xl text-xs items-center gap-1.5 transition shadow-lg">
           <i data-lucide="settings" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Ajustes Web</span>
+          <span class="hidden md:inline">Ajustes Web</span>
         </button>
-        <button id="admin-categories-btn" onclick="openCategoriesModal()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-3 py-2 rounded-xl text-xs items-center gap-1.5 transition shadow-lg">
+        <button id="admin-categories-btn" onclick="openCategoriesModal()" class="hidden bg-indigo-600 hover:bg-indigo-500 text-white font-bold p-2 sm:px-3 sm:py-2 rounded-xl text-xs items-center gap-1.5 transition shadow-lg">
           <i data-lucide="layers" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Categorías</span>
+          <span class="hidden md:inline">Categorías</span>
         </button>
-        <button id="admin-add-btn" onclick="openProductModal()" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3 py-2 rounded-xl text-xs items-center gap-1.5 transition shadow-lg">
+        <button id="admin-add-btn" onclick="openProductModal()" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-2 sm:px-3 sm:py-2 rounded-xl text-xs items-center gap-1.5 transition shadow-lg">
           <i data-lucide="plus-circle" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Nuevo Producto</span>
+          <span class="hidden md:inline">Nuevo Producto</span>
         </button>
 
         <!-- CARRITO DE COMPRAS -->
         <button onclick="toggleCart(true)" class="relative bg-slate-900 hover:bg-slate-800 border border-slate-800 text-white p-2.5 rounded-xl transition flex items-center gap-2">
           <i data-lucide="shopping-bag" class="w-5 h-5 text-purple-400"></i>
           <span class="font-bold text-xs hidden sm:inline">Carrito</span>
-          <span id="cart-count" class="bg-purple-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center absolute -top-1.5 -right-1.5 sm:static sm:w-5 sm:h-5 sm:text-xs">0</span>
+          <span id="cart-count" class="bg-purple-600 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center absolute -top-1 -right-1 sm:static sm:w-5 sm:h-5 sm:text-xs">0</span>
         </button>
       </div>
     </div>
   </header>
 
   <!-- HERO BANNER -->
-  <section id="hero-section" class="bg-gradient-to-b from-purple-950/20 to-transparent border-b border-slate-800/50 py-8 px-4">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="space-y-3 text-center md:text-left max-w-xl w-full">
+  <section id="hero-section" class="w-full bg-gradient-to-b from-purple-950/20 to-transparent border-b border-slate-800/50 py-6 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 w-full">
+      <div class="space-y-3 text-center md:text-left w-full max-w-xl">
         <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-500/10 border border-purple-500/30 rounded-full text-purple-300 text-[11px] font-semibold uppercase tracking-wider">
           <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-400"></i>
           <span id="hero-badge-text">Garantía & Envíos Rápidos</span>
@@ -113,7 +113,7 @@
         <h2 id="hero-title-text" class="text-2xl sm:text-4xl font-black font-display leading-tight text-white">CATÁLOGO EXCLUSIVO <br><span class="text-purple-400">LOS MEJORES PRECIOS</span></h2>
         <p id="hero-desc-text" class="text-slate-400 text-xs sm:text-sm">Encuentra tus artículos favoritos con atención inmediata y entregas directas a tu puerta.</p>
       </div>
-      <div class="bg-slate-900/90 border border-slate-800 p-5 rounded-2xl flex flex-col items-center text-center max-w-xs w-full shadow-lg shrink-0">
+      <div class="bg-slate-900/90 border border-slate-800 p-4 sm:p-5 rounded-2xl flex flex-col items-center text-center w-full max-w-xs shadow-lg shrink-0">
         <i data-lucide="message-square" class="w-7 h-7 text-emerald-400 mb-2"></i>
         <h3 class="font-bold text-white text-xs mb-1">¿Atención personalizada?</h3>
         <p class="text-[11px] text-slate-400 mb-3">Escríbenos directamente para asesorarte</p>
@@ -126,16 +126,18 @@
   </section>
 
   <!-- SECCIÓN PRINCIPAL DE CATALOGO -->
-  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-    <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-6">
-      <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 custom-scrollbar w-full md:w-auto" id="categories-container"></div>
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full box-border">
+    <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-6 w-full">
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 custom-scrollbar w-full md:w-auto flex-1" id="categories-container"></div>
       <div class="relative w-full md:w-72 shrink-0">
         <input type="text" id="search-input" oninput="handleSearch()" placeholder="Buscar producto..." class="w-full bg-slate-900 border border-slate-800 text-white text-xs sm:text-sm rounded-xl pl-9 pr-4 py-2.5 focus:outline-none focus:border-purple-500 transition placeholder:text-slate-500">
         <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
       </div>
     </div>
-    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"></div>
-    <div id="empty-state" class="hidden text-center py-16 space-y-2">
+    
+    <div id="products-grid" class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"></div>
+    
+    <div id="empty-state" class="hidden text-center py-16 space-y-2 w-full">
       <i data-lucide="frown" class="w-10 h-10 text-slate-600 mx-auto"></i>
       <h3 class="text-base font-bold text-slate-300">No encontramos productos</h3>
       <p class="text-slate-500 text-xs">Prueba buscando otro término o selecciona otra categoría.</p>
@@ -308,8 +310,8 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-900/50 border-t border-slate-800 py-6 px-4 mt-8 text-slate-400 text-[11px] text-center">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+  <footer class="w-full bg-slate-900/50 border-t border-slate-800 py-6 px-4 mt-8 text-slate-400 text-[11px] text-center">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 w-full">
       <div class="flex items-center gap-2">
         <div id="footer-logo-icon" class="w-5 h-5 bg-purple-600 rounded-lg flex items-center justify-center font-display font-bold text-white text-[10px]">V</div>
         <span id="footer-site-name" class="font-display font-bold text-slate-200">MI TIENDA ONLINE</span>
@@ -386,7 +388,7 @@
 
       // Temas
       const body = document.getElementById('app-body');
-      body.className = "min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white ";
+      body.className = "min-h-screen flex flex-col justify-between selection:bg-purple-500 selection:text-white w-full overflow-x-hidden ";
       
       if (siteSettings.theme === 'light') {
         body.className += "bg-slate-100 text-slate-800";
@@ -556,7 +558,7 @@
     function filterCategory(id) { currentCategory = id; renderCategories(); renderProducts(); }
     function handleSearch() { currentSearch = document.getElementById('search-input').value.toLowerCase(); renderProducts(); }
 
-    // RENDERIZADO PRODUCTOS
+    // RENDERIZADO PRODUCTOS (CON CORRECCIÓN DE ANCHO MÓVIL Y TARJETAS)
     function renderProducts() {
       const grid = document.getElementById('products-grid');
       const emptyState = document.getElementById('empty-state');
@@ -570,23 +572,23 @@
       emptyState.classList.add('hidden');
 
       grid.innerHTML = filtered.map(p => `
-        <div class="bg-slate-900 border border-slate-800 hover:border-purple-500/50 rounded-2xl p-3.5 flex flex-col justify-between transition-all duration-300 group relative">
+        <div class="w-full max-w-full bg-slate-900 border border-slate-800 hover:border-purple-500/50 rounded-2xl p-3.5 flex flex-col justify-between transition-all duration-300 group relative box-border overflow-hidden">
           ${isAdmin ? `
             <div class="absolute top-2 right-2 z-10 flex items-center gap-1 bg-black/80 border border-purple-500/40 p-1 rounded-xl backdrop-blur">
               <button onclick="openProductModal('${p.id}')" class="p-1 text-cyan-400 hover:text-cyan-200"><i data-lucide="edit-3" class="w-3.5 h-3.5"></i></button>
               <button onclick="deleteProduct('${p.id}')" class="p-1 text-red-400 hover:text-red-200"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
             </div>
           ` : ''}
-          <div>
-            <div class="h-36 w-full bg-slate-950 rounded-xl overflow-hidden mb-3 relative flex items-center justify-center p-2">
-              <img src="${p.image}" class="h-full object-contain group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=600&q=80'">
-              ${p.badge1 ? `<span class="absolute bottom-1.5 left-1.5 bg-purple-950/90 border border-purple-500/40 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded">${p.badge1}</span>` : ''}
-              ${p.badge2 ? `<span class="absolute bottom-1.5 right-1.5 bg-cyan-950/90 border border-cyan-500/40 text-cyan-300 text-[9px] font-bold px-1.5 py-0.5 rounded">${p.badge2}</span>` : ''}
+          <div class="w-full">
+            <div class="h-44 sm:h-40 w-full bg-slate-950 rounded-xl overflow-hidden mb-3 relative flex items-center justify-center p-2 box-border">
+              <img src="${p.image}" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=600&q=80'">
+              ${p.badge1 ? `<span class="absolute bottom-1.5 left-1.5 bg-purple-950/90 border border-purple-500/40 text-purple-300 text-[9px] font-bold px-1.5 py-0.5 rounded z-10">${p.badge1}</span>` : ''}
+              ${p.badge2 ? `<span class="absolute bottom-1.5 right-1.5 bg-cyan-950/90 border border-cyan-500/40 text-cyan-300 text-[9px] font-bold px-1.5 py-0.5 rounded z-10">${p.badge2}</span>` : ''}
             </div>
-            <h3 class="font-bold text-white text-sm mb-1 truncate">${p.name}</h3>
-            <p class="text-slate-400 text-[11px] line-clamp-2 mb-3">${p.description}</p>
+            <h3 class="font-bold text-white text-sm mb-1 truncate w-full">${p.name}</h3>
+            <p class="text-slate-400 text-[11px] line-clamp-2 mb-3 w-full">${p.description}</p>
           </div>
-          <div class="pt-2.5 border-t border-slate-800 flex items-center justify-between">
+          <div class="pt-2.5 border-t border-slate-800 flex items-center justify-between w-full">
             <div>
               <span class="text-[9px] text-slate-500 block uppercase font-semibold">Precio</span>
               <span class="font-display font-bold text-base text-white">${siteSettings.currency}${parseFloat(p.price).toFixed(2)}</span>
@@ -670,7 +672,7 @@
       if (!p) return;
       document.getElementById('detail-modal-body').innerHTML = `
         <div class="space-y-4">
-          <div class="h-48 w-full bg-slate-950 border border-slate-800 rounded-xl p-2 flex items-center justify-center"><img src="${p.image}" class="h-full object-contain"></div>
+          <div class="h-48 w-full bg-slate-950 border border-slate-800 rounded-xl p-2 flex items-center justify-center overflow-hidden"><img src="${p.image}" class="w-full h-full object-cover rounded-lg"></div>
           <div>
             <span class="text-[10px] text-purple-400 font-bold uppercase">${p.category}</span>
             <h2 class="text-lg font-display font-bold text-white">${p.name}</h2>
@@ -721,7 +723,7 @@
         sub += prod.price * item.quantity;
         return `
           <div class="flex items-center gap-2.5 bg-slate-950 p-2.5 rounded-xl border border-slate-800">
-            <img src="${prod.image}" class="w-12 h-12 object-contain bg-slate-900 rounded-lg p-1 shrink-0">
+            <img src="${prod.image}" class="w-12 h-12 object-cover bg-slate-900 rounded-lg p-1 shrink-0">
             <div class="flex-1 min-w-0"><h4 class="text-white text-xs font-bold truncate">${prod.name}</h4><p class="text-purple-400 text-xs font-bold">${siteSettings.currency}${parseFloat(prod.price).toFixed(2)}</p></div>
             <div class="flex items-center gap-1.5 bg-slate-900 border border-slate-800 rounded-lg p-1 shrink-0">
               <button onclick="updateQuantity('${item.id}', -1)" class="text-slate-400 hover:text-white px-1">-</button>
